@@ -1,0 +1,37 @@
+import serial   
+import os, time
+ 
+# Enable Serial Communication
+port = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=5)
+ 
+# Transmitting AT Commands to the Modem
+
+# '\r\n' indicates the Enter key
+ 
+#while True:
+
+port.write(b'AT'+b'\r\n')
+
+data = port.read(20)
+
+   # rcv = port.readline()
+print(data[:-2].decode('ascii'))
+
+time.sleep(5)
+
+port.write(b'ATDyour number;'+ b'\r\n')
+
+data = port.read(20)
+
+print(data[:-2].decode('ascii'))
+
+time.sleep(5)
+
+port.write(0X1A)
+
+data = port.read(20)
+
+print(data[:-2].decode('ascii'))
+time.sleep(5)
+
+#port.close()
